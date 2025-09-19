@@ -46,7 +46,7 @@ def get_rerank(questions: List[str]):
     candidates = list(unique_candidates.keys())
     
     reranker = CrossEncoder("NeginShams/cross_encoder_v2", trust_remote_code=True)
-    pairs = [(questions, doc) for doc in candidates]
+    pairs = [(questions[0], doc) for doc in candidates]
     scores = reranker.predict(pairs)
     scores = np.array(scores)
     scores_norm = (scores - scores.min()) / (scores.max() - scores.min())

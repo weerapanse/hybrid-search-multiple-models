@@ -48,12 +48,10 @@ def create_collection(dim: int):
 
 # Example usage:
 if __name__ == "__main__":
-    docs = [
-        "Qdrant is a vector database for the next generation of AI applications.",
-        "FastEmbed provides state-of-the-art embedding models.",
-        "Sentence Transformers are widely used for dense retrieval.",
-        "Splade is a sparse model that expands queries for better recall."
-    ]
+    import json
+    with open('chunks/docs_base.json') as f:
+        doc_chunks = json.load(f)
+    docs = [d['content'] for d in doc_chunks]
     dense, dim = get_dense(docs)
     sparse = get_sparse(docs)
     points = get_point(dense=dense, sparse=sparse, docs=docs)
